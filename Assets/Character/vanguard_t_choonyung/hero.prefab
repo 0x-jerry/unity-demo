@@ -415,6 +415,7 @@ GameObject:
   - component: {fileID: 1352286669047087258}
   - component: {fileID: 3460678769605932490}
   - component: {fileID: 4203290885798471762}
+  - component: {fileID: 5858725415179788859}
   m_Layer: 0
   m_Name: hero
   m_TagString: Player
@@ -500,7 +501,21 @@ MonoBehaviour:
   groundChecker: {fileID: 8696281176879250894}
   gravity: -9.81
   groundDistance: 0.2
-  _animator: {fileID: 1352286669047087258}
+  animator: {fileID: 1352286669047087258}
+--- !u!114 &5858725415179788859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163170784946568112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9713395ee802abc46a472e951083c737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 3460678769605932490}
+  animator: {fileID: 1352286669047087258}
 --- !u!1 &2311805504938108534
 GameObject:
   m_ObjectHideFlags: 0

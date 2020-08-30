@@ -7,6 +7,7 @@ static class AnimatorParams
 {
     public const string Walk = "walk";
     public const string Run = "run";
+    public const string Attack = "attack";
 }
 
 [RequireComponent(typeof(Animator))]
@@ -14,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public CharacterController character;
+    public Animator animator;
 
     public LayerMask groundLayer;
 
@@ -30,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.81f;
     public float groundDistance = .2f;
 
-    public Animator _animator;
 
     private Vector2 _pointer;
 
@@ -51,11 +52,6 @@ public class PlayerMovement : MonoBehaviour
         _move = ctx.ReadValue<Vector2>();
     }
 
-    public void OnFire(InputAction.CallbackContext ctx)
-    {
-        Debug.Log("Fire !");
-    }
-
     public void OnMouseMove(InputAction.CallbackContext ctx)
     {
         _pointer = ctx.ReadValue<Vector2>();
@@ -65,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _isRunning = ctx.ReadValueAsButton();
 
-        _animator.SetBool(AnimatorParams.Run, _isRunning);
+        animator.SetBool(AnimatorParams.Run, _isRunning);
     }
 
     public void Update()
@@ -114,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (_isWalk)
             {
-                _animator.SetBool(AnimatorParams.Walk, false);
+                animator.SetBool(AnimatorParams.Walk, false);
                 _isWalk = false;
             }
             return;
@@ -122,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!_isWalk)
         {
-            _animator.SetBool(AnimatorParams.Walk, true);
+            animator.SetBool(AnimatorParams.Walk, true);
             _isWalk = true;
         }
 

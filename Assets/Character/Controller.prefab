@@ -80,7 +80,7 @@ MonoBehaviour:
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5222942315224697613}
+      - m_Target: {fileID: 2549273981839245668}
         m_MethodName: OnFire
         m_Mode: 0
         m_Arguments:
@@ -372,5 +372,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9971dc042cee5c4d8661f5f2657e827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2549273981839245668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5858725415179788859, guid: 6545d7f99bd0e2e41aee4889edd75731,
+    type: 3}
+  m_PrefabInstance: {fileID: 8227663753034113887}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9713395ee802abc46a472e951083c737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

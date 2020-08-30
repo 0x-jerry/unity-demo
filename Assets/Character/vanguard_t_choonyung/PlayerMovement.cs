@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 static class AnimatorParams
 {
     public const string Walk = "walk";
-    public const string RUN = "run";
+    public const string Run = "run";
 }
 
 [RequireComponent(typeof(Animator))]
@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public Camera cam;
 
     public float moveSpeed;
+
+    public float runSpeed;
 
     public float turnSmoothTime = 0.1f;
 
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _move;
 
     private bool _isWalk = false;
+    private bool _isRunning = false;
 
     private bool _isGrounded = false;
 
@@ -56,6 +59,13 @@ public class PlayerMovement : MonoBehaviour
     public void OnMouseMove(InputAction.CallbackContext ctx)
     {
         _pointer = ctx.ReadValue<Vector2>();
+    }
+
+    public void OnShift(InputAction.CallbackContext ctx)
+    {
+        _isRunning = ctx.ReadValueAsButton();
+
+        _animator.SetBool(AnimatorParams.Run, _isRunning);
     }
 
     public void Update()
@@ -86,14 +96,12 @@ public class PlayerMovement : MonoBehaviour
 
         var mouseAngle = Mathf.Atan2(mouseDir.x, mouseDir.y) * Mathf.Rad2Deg;
 
-        float moveAngle = 0;
-
         if (move.sqrMagnitude > 0.01)
         {
-            moveAngle = Mathf.Atan2(move.x, move.y) * Mathf.Rad2Deg;
+            mouseAngle = Mathf.Atan2(move.x, move.y) * Mathf.Rad2Deg;
         }
 
-        var angle = mouseAngle + moveAngle;
+        var angle = mouseAngle;
 
         var targetAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref _turnSmoothVelocity, turnSmoothTime);
 
@@ -118,7 +126,9 @@ public class PlayerMovement : MonoBehaviour
             _isWalk = true;
         }
 
-        var scaledMoveSpeed = moveSpeed * Time.deltaTime;
+        var speed = _isRunning ? runSpeed : moveSpeed;
+
+        var scaledMoveSpeed = speed * Time.deltaTime;
 
         var dir = transform.forward;
 

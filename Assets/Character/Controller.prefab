@@ -163,6 +163,21 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1cae8fee-ce0e-4725-9c2c-b1f5769f7840
     m_ActionName: Player/Mouse[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5222942315224697613}
+        m_MethodName: OnShift
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 141f62cd-2363-4a5f-81bf-e55d5e8e109c
+    m_ActionName: Player/Shift[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player

@@ -494,7 +494,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   cam: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 2
+  runSpeed: 4
+  turnSmoothTime: 0.1
   groundChecker: {fileID: 8696281176879250894}
   gravity: -9.81
   groundDistance: 0.2

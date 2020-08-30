@@ -16,16 +16,17 @@ public class PlayerAttacks : MonoBehaviour
     public float attackGap = 0.2f;
 
     private float _lastAttackTime = 0;
+    private bool _isFire = false;
 
-    private int _attackValue = -1;
-
+    private int _attackValue = 0;
 
     public void OnFire(InputAction.CallbackContext ctx)
     {
-        var isButtonDown = ctx.ReadValueAsButton();
-        if (isButtonDown && !playerMovement.isWalk)
+        _isFire = ctx.ReadValueAsButton();
+        if (_isFire)
         {
             _lastAttackTime = Time.time;
+            _attackValue++;
         }
     }
 
@@ -37,13 +38,9 @@ public class PlayerAttacks : MonoBehaviour
 
     public void calAttackAction()
     {
-        if (Time.time - _lastAttackTime < attackGap)
+        if (Time.time > _lastAttackTime + attackGap)
         {
-            _attackValue++;
-        }
-        else
-        {
-            _attackValue = -1;
+            _attackValue = 0;
         }
     }
 }

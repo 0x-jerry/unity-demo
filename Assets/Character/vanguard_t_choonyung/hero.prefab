@@ -491,6 +491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 3460678769605932490}
+  animator: {fileID: 1352286669047087258}
+  playerAttacks: {fileID: 5858725415179788859}
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -501,7 +503,9 @@ MonoBehaviour:
   groundChecker: {fileID: 8696281176879250894}
   gravity: -9.81
   groundDistance: 0.2
-  animator: {fileID: 1352286669047087258}
+  isRunning: 0
+  isWalk: 0
+  isGrounded: 0
 --- !u!114 &5858725415179788859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,6 +520,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 3460678769605932490}
   animator: {fileID: 1352286669047087258}
+  playerMovement: {fileID: 4203290885798471762}
+  isAttacking: 0
 --- !u!1 &2311805504938108534
 GameObject:
   m_ObjectHideFlags: 0

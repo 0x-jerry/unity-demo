@@ -10,13 +10,18 @@ static class AnimatorParams
     public const string Attack = "attack";
 }
 
+static class AnimatorTags
+{
+    public const string Attack = "attack";
+}
+
 [RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
 
     public CharacterController character;
     public Animator animator;
-
+    public PlayerAttacks playerAttacks;
     public LayerMask groundLayer;
 
     public Camera cam;
@@ -32,15 +37,17 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.81f;
     public float groundDistance = .2f;
 
+    [HideInInspector]
+    public bool isRunning = false;
+    [HideInInspector]
+    public bool isWalk = false;
+    [HideInInspector]
+    public bool isGrounded = false;
 
     private Vector2 _pointer;
 
     private Vector2 _move;
 
-    private bool _isWalk = false;
-    private bool _isRunning = false;
-
-    private bool _isGrounded = false;
 
     private Vector3 _velocity = new Vector3();
 
@@ -59,9 +66,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnShift(InputAction.CallbackContext ctx)
     {
-        _isRunning = ctx.ReadValueAsButton();
+        isRunning = ctx.ReadValueAsButton();
 
-        animator.SetBool(AnimatorParams.Run, _isRunning);
+        animator.SetBool(AnimatorParams.Run, isRunning);
     }
 
     public void Update()
@@ -70,13 +77,18 @@ public class PlayerMovement : MonoBehaviour
 
         _Rotate(_pointer, _move);
 
-        _Move(_move);
+        var info = animator.GetCurrentAnimatorStateInfo(0);
+        var isAttacking = info.IsTag(AnimatorTags.Attack);
+        if (!isAttacking)
+        {
+            _Move(_move);
+        }
     }
 
     private void _checkGround()
     {
 
-        _isGrounded = Physics.CheckSphere(groundChecker.position, groundDistance, groundLayer);
+        isGrounded = Physics.CheckSphere(groundChecker.position, groundDistance, groundLayer);
     }
 
     private void _Rotate(Vector2 pointer, Vector2 move)
@@ -108,21 +120,21 @@ public class PlayerMovement : MonoBehaviour
     {
         if (direction.sqrMagnitude < 0.01)
         {
-            if (_isWalk)
+            if (isWalk)
             {
                 animator.SetBool(AnimatorParams.Walk, false);
-                _isWalk = false;
+                isWalk = false;
             }
             return;
         }
 
-        if (!_isWalk)
+        if (!isWalk)
         {
             animator.SetBool(AnimatorParams.Walk, true);
-            _isWalk = true;
+            isWalk = true;
         }
 
-        var speed = _isRunning ? runSpeed : moveSpeed;
+        var speed = isRunning ? runSpeed : moveSpeed;
 
         var scaledMoveSpeed = speed * Time.deltaTime;
 
@@ -132,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
 
         character.Move(moveStep);
 
-        if (_isGrounded && _velocity.y < 0)
+        if (isGrounded && _velocity.y < 0)
         {
             _velocity.y = -2f;
         }

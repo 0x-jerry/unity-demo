@@ -3306,6 +3306,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2549273981839245668, guid: 41556639beb3aab4db9bd914a833ae73,
+        type: 3}
+      propertyPath: attackGap
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6193489299632210855, guid: 41556639beb3aab4db9bd914a833ae73,
         type: 3}
       propertyPath: m_IsActive

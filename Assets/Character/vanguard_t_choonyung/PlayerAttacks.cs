@@ -6,12 +6,14 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Animator))]
 public class PlayerAttacks : MonoBehaviour
 {
-
     public CharacterController character;
 
     public Animator animator;
 
-    // private bool _isAttack = false;
+    public PlayerMovement playerMovement;
+
+    [Range(0.1f, 1)]
+    public float attackGap = 0.2f;
 
     private float _lastAttackTime = 0;
 
@@ -21,7 +23,7 @@ public class PlayerAttacks : MonoBehaviour
     public void OnFire(InputAction.CallbackContext ctx)
     {
         var isButtonDown = ctx.ReadValueAsButton();
-        if (isButtonDown)
+        if (isButtonDown && !playerMovement.isWalk)
         {
             _lastAttackTime = Time.time;
         }
@@ -35,7 +37,7 @@ public class PlayerAttacks : MonoBehaviour
 
     public void calAttackAction()
     {
-        if (Time.time - _lastAttackTime < 1)
+        if (Time.time - _lastAttackTime < attackGap)
         {
             _attackValue++;
         }
